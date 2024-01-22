@@ -71,16 +71,24 @@ if($db_conn===false)
                 echo json_encode(["success"=>"Check user data"]);
                 return;
             }
-            print_r($updateresult);die;
+           // print_r($updateresult);die;
             break;
-            case "POST":
-                $userpostdata=json_decode(file_get_contents("php://input"));
-            //echo "sucess data";
+            case "DELETE":
+                $path=explode('/',$_SERVER["REQUEST_URI"]);
+            //echo "message userid----- ".$path[4];die;;
             //print_r($userpostdata);die;
-            $uesrid=$userupdate ->userid;
-            $uesrname=$userupdate ->username;
-            $useremail=$userupdate ->email;
-            $status=$userupdate ->status;
+           
+            $result =mysqli_query($db_conn, "DELETE FROM tlb_user WHERE userid='$path[4]'");
+            if($result)
+            {
+                echo json_encode(["success"=>"Record deleted successfully"]);
+                return;
+
+            } else{
+                echo json_encode(["success"=>"Check user data"]);
+                return;
+            }
+            break;
 
 
 
