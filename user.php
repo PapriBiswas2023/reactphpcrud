@@ -15,6 +15,23 @@ if($db_conn===false)
  switch($method)
  {
     case "GET":
+        $path=explode('/',$_SERVER['REQUEST_URI']);
+        if(isset($path[4]) && is_numeric($path[4]))
+        {
+            $json_array=array();
+            $userid=$path[4];
+            $getuserrow=mysqli_query($db_conn, "SELECT * FROM tlb_user WHERE userid='$userid'");
+            while($userow=mysqli_fetch_array($getuserrow))
+            {
+                $json_array['rowUserdata']=array('id'=>$userrow['userid'],'username'=>$userrow['username'],'useremail'=>$userrow['useremail'],'status'=>$userrow['status']);
+
+            }
+            echo json_encode($json_array['rowUserdata']);
+            return;
+            
+        }
+        else 
+        {
         $alluser= mysqli_query($db_conn, "SELECT * FROM tlb_user");
         if(mysqli_num_rows($alluser) > 0)
         {
@@ -33,6 +50,7 @@ if($db_conn===false)
             return;
 
         }
+    }
         break;
         case "POST":
             $userpostdata=json_decode(file_get_contents("php://input"));
