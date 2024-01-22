@@ -73,6 +73,16 @@ if($db_conn===false)
             }
             print_r($updateresult);die;
             break;
+            case "POST":
+                $userpostdata=json_decode(file_get_contents("php://input"));
+            //echo "sucess data";
+            //print_r($userpostdata);die;
+            $uesrid=$userupdate ->userid;
+            $uesrname=$userupdate ->username;
+            $useremail=$userupdate ->email;
+            $status=$userupdate ->status;
+
+
 
 
  }
