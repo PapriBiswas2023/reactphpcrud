@@ -40,7 +40,7 @@ if($db_conn===false)
             $useremail=$userpostdata ->email;
             $status=$userpostdata ->status;
             $result =mysqli_query($db_conn, "INSERT INTO (username, useremail, status) VALUES ('$username','$useremail','$status')");
-            if()
+            if($result)
             {
                 echo json_encode(["success"=>"User added successfully"]);
                 return;
@@ -57,7 +57,7 @@ if($db_conn===false)
             $uesrname=$userupdate ->username;
             $useremail=$userupdate ->email;
             $status=$userupdate ->status;
-            $result =mysqli_query($db_conn, "INSERT INTO (username, useremail, status) VALUES ('$username','$useremail','$status')");
+           /* $result =mysqli_query($db_conn, "INSERT INTO (username, useremail, status) VALUES ('$username','$useremail','$status')");
             if()
             {
                 echo json_encode(["success"=>"User added successfully"]);
@@ -66,7 +66,7 @@ if($db_conn===false)
             } else{
                 echo json_encode(["success"=>"Check user data"]);
                 return;
-            }
+            }*/
 
 
  }
