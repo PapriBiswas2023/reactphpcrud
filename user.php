@@ -56,7 +56,7 @@ if($db_conn===false)
             $userpostdata=json_decode(file_get_contents("php://input"));
             //echo "sucess data";
             //print_r($userpostdata);die;
-            $uesrname=$userpostdata ->username;
+            $username=$userpostdata ->username;
             $useremail=$userpostdata ->email;
             $status=$userpostdata ->status;
             $result =mysqli_query($db_conn, "INSERT INTO tlb_user (username, useremail, status) VALUES ('$username','$useremail','$status')");
@@ -75,8 +75,8 @@ if($db_conn===false)
                 $userupdate=json_decode(file_get_contents("php://input"));
             //echo "sucess data";
             //print_r($userpostdata);die;
-            $uesrid=$userupdate ->userid;
-            $uesrname=$userupdate ->username;
+            $userid=$userupdate ->userid;
+            $username=$userupdate ->username;
             $useremail=$userupdate ->email;
             $status=$userupdate ->status;
             $updateresult =mysqli_query($db_conn, "UPDATE tlb_user SET username='$username',useremail='$useremail', status='$status'WHERE userid='$userid'");
