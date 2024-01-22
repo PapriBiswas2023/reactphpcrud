@@ -18,6 +18,7 @@ if($db_conn===false)
         $alluser= mysqli_query($db_conn, "SELECT * FROM tlb_user");
         if(mysqli_num_rows($alluser) > 0)
         {
+            $json_array["userdata"] = array();
             while($row = mysqli_fetch_array($alluser))
             {
                 $json_array["userdata"][]= array("id"=>$row["userid"],"username"=>$row["username"],"useremail"=>$row["useremail"],"status"=>$row["status"]);
@@ -39,8 +40,8 @@ if($db_conn===false)
             $uesrname=$userpostdata ->username;
             $useremail=$userpostdata ->email;
             $status=$userpostdata ->status;
-            $result =mysqli_query($db_conn, "INSERT INTO (username, useremail, status) VALUES ('$username','$useremail','$status')");
-            if($result)
+            $result =mysqli_query($db_conn, "INSERT INTO tlb_user (username, useremail, status) VALUES ('$username','$useremail','$status')");
+            if()
             {
                 echo json_encode(["success"=>"User added successfully"]);
                 return;
