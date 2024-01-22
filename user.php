@@ -18,6 +18,8 @@ if($db_conn===false)
         $alluser= mysqli_query($db_conn, "SELECT * FROM tlb_user");
         if(mysqli_num_rows($alluser) > 0)
         {
+            $json_array["userdata"] = array();
+            
             while($row = mysqli_fetch_array($alluser))
             {
                 $json_array["userdata"][]= array("id"=>$row["userid"],"username"=>$row["username"],"useremail"=>$row["useremail"],"status"=>$row["status"]);
@@ -39,8 +41,8 @@ if($db_conn===false)
             $uesrname=$userpostdata ->username;
             $useremail=$userpostdata ->email;
             $status=$userpostdata ->status;
-            $result =mysqli_query($db_conn, "INSERT INTO (username, useremail, status) VALUES ('$username','$useremail','$status')");
-            if()
+            $result =mysqli_query($db_conn, "INSERT INTO tlb_user (username, useremail, status) VALUES ('$username','$useremail','$status')");
+            if($result)
             {
                 echo json_encode(["success"=>"User added successfully"]);
                 return;
@@ -49,6 +51,8 @@ if($db_conn===false)
                 echo json_encode(["success"=>"Check user data"]);
                 return;
             }
+            break;
+            
             case "PUT":
                 $userupdate=json_decode(file_get_contents("php://input"));
             //echo "sucess data";
@@ -57,16 +61,18 @@ if($db_conn===false)
             $uesrname=$userupdate ->username;
             $useremail=$userupdate ->email;
             $status=$userupdate ->status;
-            $result =mysqli_query($db_conn, "INSERT INTO (username, useremail, status) VALUES ('$username','$useremail','$status')");
-            if()
+            $updateresult =mysqli_query($db_conn, "UPDATE tlb_user SET username='$username',useremail='$useremail', status='$status'WHERE userid='$userid'");
+            if($updateresult)
             {
-                echo json_encode(["success"=>"User added successfully"]);
+                echo json_encode(["success"=>"User updated successfully"]);
                 return;
 
             } else{
                 echo json_encode(["success"=>"Check user data"]);
                 return;
             }
+            print_r($updateresult);die;
+            break;
 
 
  }
