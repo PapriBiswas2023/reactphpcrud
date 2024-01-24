@@ -95,8 +95,14 @@ if($db_conn===false)
                 $path=explode('/',$_SERVER["REQUEST_URI"]);
             //echo "message userid----- ".$path[4];die;;
             //print_r($userpostdata);die;
+            $userid = $path[4];
+            if (!is_numeric($userid)) {
+              http_response_code(400);
+              echo json_encode(["error" => "Invalid user ID"]);
+              return;
+            }
            
-            $result =mysqli_query($db_conn, "DELETE FROM tlb_user WHERE userid='$path[4]'");
+            $result =mysqli_query($db_conn, "DELETE FROM tlb_user WHERE userid='$userid'");
             if($result)
             {
                 echo json_encode(["success"=>"Record deleted successfully"]);
